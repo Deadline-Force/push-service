@@ -6,7 +6,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.deadlineforce.backend.security.details.AuthorizationRoles;
-import com.deadlineforce.backend.security.details.UserDetailsImpl;
+import com.deadlineforce.backend.security.details.IdUserDetailsImpl;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
@@ -55,8 +55,8 @@ public class JWTUtils {
             DecodedJWT decodedJWT = this.JWTVerifier.verify(JWTToken);
             JWTPayload payload = this.objectMapper
                     .readValue(Base64.getDecoder().decode(decodedJWT.getPayload()), JWTPayload.class);
-            UserDetailsImpl userDetails = new UserDetailsImpl(payload.username(), "");
-            userDetails.setAuthority(AuthorizationRoles.valueOf(payload.role));
+            IdUserDetailsImpl userDetails = new IdUserDetailsImpl(payload.userId(), payload.username(), "");
+            userDetails.setAuthority(AuthorizationRoles.valueOf(payload.role()));
             return userDetails;
         } catch (IOException e) {
             throw new JWTVerificationException(e.getMessage(), e);

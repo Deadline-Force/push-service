@@ -1,22 +1,24 @@
 package com.deadlineforce.backend.security.details;
 
+import com.deadlineforce.backend.security.IdUserDetails;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @ToString
-public class UserDetailsImpl implements UserDetails {
+public class IdUserDetailsImpl implements IdUserDetails {
+    private final long userId;
     private final String username, password;
     private final Collection<GrantedAuthority> authorities = new HashSet<>();
     @Setter
     private boolean expired = false;
 
-    public UserDetailsImpl(String username, String password) {
+    public IdUserDetailsImpl(long userId, String username, String password) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
     }
@@ -60,5 +62,10 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         throw new RuntimeException();
+    }
+
+    @Override
+    public long getId() {
+        return this.userId;
     }
 }
