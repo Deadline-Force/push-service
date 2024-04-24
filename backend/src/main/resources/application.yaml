@@ -5,3 +5,8 @@ spring:
     password: "${DB_PASSWORD}"
   application:
     name: "backend"
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+server:
+  port: 8080
