@@ -1,6 +1,5 @@
 package com.deadlineforce.backend.security;
 
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,7 @@ public class JWTAuthenticationProvider implements AuthenticationProvider {
 
 
         } else {
-            throw new BadCredentialsException(credentials.toString());
+            throw new AuthenticationException(credentials.toString());
         }
     }
 }
