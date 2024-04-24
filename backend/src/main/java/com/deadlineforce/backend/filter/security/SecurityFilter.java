@@ -1,5 +1,6 @@
 package com.deadlineforce.backend.filter.security;
 
+import com.deadlineforce.backend.security.AuthenticationException;
 import com.deadlineforce.backend.security.AuthenticationProvider;
 import com.deadlineforce.backend.security.CredentialsImpl;
 import com.deadlineforce.backend.security.jwt.JWTUtils;
@@ -43,7 +44,7 @@ public class SecurityFilter implements Filter {
             }
 
             filterChain.doFilter(servletRequest, servletResponse);
-        } catch (RuntimeException e) {
+        } catch (AuthenticationException e) {
             throw new BadCredentialsException(e.getMessage());
         }
     }
