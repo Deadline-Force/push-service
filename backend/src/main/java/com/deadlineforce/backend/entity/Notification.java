@@ -2,6 +2,7 @@ package com.deadlineforce.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.sql.Date;
 
@@ -16,6 +17,7 @@ public class Notification {
     private String title, message;
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @RestResource(exported = false)
     private User userOwner;
     private Date createdAt;
 }

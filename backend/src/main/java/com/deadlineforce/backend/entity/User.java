@@ -4,6 +4,7 @@ import com.deadlineforce.backend.entity.converter.AuthorizationRolesConverter;
 import com.deadlineforce.backend.security.details.AuthorizationRoles;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ public class User {
     @Column(name = "user_role")
     @Convert(converter = AuthorizationRolesConverter.class)
     private AuthorizationRoles role;
+    @RestResource(exported = false)
     @OneToMany(mappedBy = "userOwner")
     private List<Notification> createdNotifications;
     @ManyToMany
+    @RestResource(exported = false)
     @JoinTable(
             name = "recipients",
             joinColumns = @JoinColumn(name = "user_id"),
