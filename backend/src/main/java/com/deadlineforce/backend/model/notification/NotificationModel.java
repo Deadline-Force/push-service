@@ -1,11 +1,16 @@
 package com.deadlineforce.backend.model.notification;
 
+import com.deadlineforce.backend.entity.Notification;
 import com.deadlineforce.backend.entity.User;
 import com.deadlineforce.backend.repository.NotificationRepository;
 import com.deadlineforce.backend.service.UserService;
 import com.deadlineforce.backend.service.notification.NotificationService;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class NotificationModel {
@@ -24,5 +29,12 @@ public class NotificationModel {
     public void sendNotification(User recipient, NotificationSend notificationSend) {
         User me = this.userService.getUserFromSecurityContext();
         this.notificationService.sendNotification(me, recipient, notificationSend);
+    }
+
+    public List<Notification> getCreatedNotifications(int page, int size) {
+        Page<Notification> pageNotification = this.notificationRepository
+                .findNotificationsByUserOwner_Id(this.userService.getUserIdFromSecurityContext(),
+                        PageRequest.of(page, size));
+        return pageNotification.getContent();
     }
 }
