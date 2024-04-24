@@ -17,13 +17,16 @@ public class UserService {
     }
 
     public User getUserFromSecurityContext() {
+        return this.userRepository.findById(getUserIdFromSecurityContext()).orElseThrow();
+    }
+
+    public long getUserIdFromSecurityContext() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null) {
             Object principal = authentication.getPrincipal();
             if (principal != null) {
-                IdUserDetails userDetails = (IdUserDetails) principal;
-                return this.userRepository.findById(userDetails.getId()).orElseThrow();
+                return ((IdUserDetails) principal).getId();
             }
         }
 
