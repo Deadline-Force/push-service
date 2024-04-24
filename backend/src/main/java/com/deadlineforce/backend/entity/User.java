@@ -2,6 +2,7 @@ package com.deadlineforce.backend.entity;
 
 import com.deadlineforce.backend.entity.converter.AuthorizationRolesConverter;
 import com.deadlineforce.backend.security.details.AuthorizationRoles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +23,11 @@ public class User {
     @Column(name = "user_role")
     @Convert(converter = AuthorizationRolesConverter.class)
     private AuthorizationRoles role = AuthorizationRoles.USER;
+    @JsonIgnore
     @RestResource(exported = false)
     @OneToMany(mappedBy = "userOwner")
     private List<Notification> createdNotifications;
+    @JsonIgnore
     @ManyToMany
     @RestResource(exported = false)
     @JoinTable(
