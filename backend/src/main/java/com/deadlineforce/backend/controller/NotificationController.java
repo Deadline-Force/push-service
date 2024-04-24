@@ -3,11 +3,13 @@ package com.deadlineforce.backend.controller;
 import com.deadlineforce.backend.entity.User;
 import com.deadlineforce.backend.model.notification.NotificationModel;
 import com.deadlineforce.backend.model.notification.NotificationSend;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/notifications")
+@Tag(name = "NotificationController")
 public class NotificationController {
     private final NotificationModel notificationModel;
 

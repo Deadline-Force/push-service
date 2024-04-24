@@ -19,7 +19,9 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String username, login, password;
+    private String username, login;
+    @JsonIgnore
+    private String password;
     @Column(name = "user_role")
     @Convert(converter = AuthorizationRolesConverter.class)
     private AuthorizationRoles role = AuthorizationRoles.USER;

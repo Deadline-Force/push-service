@@ -3,6 +3,7 @@ package com.deadlineforce.backend.controller;
 import com.deadlineforce.backend.model.auth.AuthModel;
 import com.deadlineforce.backend.model.auth.AuthUser;
 import com.deadlineforce.backend.model.auth.JWT;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "AuthController")
 public class AuthController {
     private final AuthModel authModel;
 
