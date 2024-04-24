@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://${POSTGRES_HOST}/${DB_NAME}"
+    username: "${DB_USER}"
+    password: "${DB_PASSWORD}"
+  application:
+    name: "backend"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+springdoc:
+  swagger-ui:
+    path: /docs
