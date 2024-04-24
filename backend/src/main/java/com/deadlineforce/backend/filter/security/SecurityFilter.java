@@ -29,15 +29,19 @@ public class SecurityFilter implements Filter {
             throws IOException, ServletException {
         try {
             String authenticationHeader = ((HttpServletRequest) servletRequest).getHeader(HttpHeaders.AUTHORIZATION);
-            UserDetails userDetails = JWTUtils.getUserDetails(authenticationHeader.split(" ")[1]);
-            Authentication authentication = this.authenticationProvider
-                    .authenticate(new CredentialsImpl(authenticationHeader, userDetails));
 
-            if (authentication == null) {
-                throw new RuntimeException("auth is null");
+            if (authenticationHeader != null && authenticationHeader.matches("Bearer .*")) {
+                UserDetails userDetails = JWTUtils.getUserDetails(authenticationHeader.split(" ")[1]);
+                Authentication authentication = this.authenticationProvider
+                        .authenticate(new CredentialsImpl(authenticationHeader, userDetails));
+
+                if (authentication == null) {
+                    throw new RuntimeException("auth is null");
+                }
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (RuntimeException e) {
             throw new BadCredentialsException(e.getMessage());
