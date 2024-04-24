@@ -39,6 +39,7 @@ public class JWTUtils {
         this.JWTVerifier = JWT.require(this.algorithm).build();
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public String createJWT(long userId, String username, String role, long expires, TimeUnit unit) {
