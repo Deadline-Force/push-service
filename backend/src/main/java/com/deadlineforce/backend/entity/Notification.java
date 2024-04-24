@@ -2,21 +2,20 @@ package com.deadlineforce.backend.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.Date;
 
+import java.sql.Date;
+
+@Data
 @Entity
 @Table(name = "notifications")
-@Data
 public class Notification {
-
     @Id
+    @Column(name = "notification_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String title;
-    private String message;
+    private long id;
+    private String title, message;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User userOwner;
-    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 }

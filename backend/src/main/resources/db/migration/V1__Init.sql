@@ -7,16 +7,16 @@ INSERT INTO roles (title) VALUES
         ('USER'), ('EMPLOYEE'), ('ADMIN');
 
 CREATE TABLE IF NOT EXISTS users (
-    user_id SERIAL PRIMARY KEY NOT NULL,
+    user_id BIGSERIAL PRIMARY KEY NOT NULL,
     username VARCHAR(128) NOT NULL,
     login VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
-    user_role BIGINT NOT NULL,
+    user_role INT NOT NULL,
     FOREIGN KEY (user_role) REFERENCES roles (role_id)
 );
 
 CREATE TABLE IF NOT EXISTS notifications (
-    notification_id SERIAL PRIMARY KEY NOT NULL,
+    notification_id BIGSERIAL PRIMARY KEY NOT NULL,
     title VARCHAR(64) NOT NULL,
     message VARCHAR(128) NOT NULL,
     created_at DATE NOT NULL,
