@@ -4,12 +4,14 @@ import com.deadlineforce.backend.entity.converter.AuthorizationRolesConverter;
 import com.deadlineforce.backend.security.details.AuthorizationRoles;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -19,7 +21,7 @@ public class User {
     private String username, login, password;
     @Column(name = "user_role")
     @Convert(converter = AuthorizationRolesConverter.class)
-    private AuthorizationRoles role;
+    private AuthorizationRoles role = AuthorizationRoles.USER;
     @RestResource(exported = false)
     @OneToMany(mappedBy = "userOwner")
     private List<Notification> createdNotifications;
@@ -31,4 +33,10 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "notification_id")
     )
     private List<Notification> receivedNotifications;
+
+    public User(String username, String login, String password) {
+        this.username = username;
+        this.login = login;
+        this.password = password;
+    }
 }

@@ -8,9 +8,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RepositoryRestResource
 public interface UserRepository extends JpaRepository<User, Long> {
     @RestResource(exported = false)
     Page<User> findByUsernameContaining(String username, Pageable pageable);
+    Optional<User> findUserByLogin(String login);
 }
