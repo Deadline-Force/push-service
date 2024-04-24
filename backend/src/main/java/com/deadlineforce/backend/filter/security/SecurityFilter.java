@@ -1,12 +1,15 @@
 package com.deadlineforce.backend.filter.security;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.deadlineforce.backend.security.AuthenticationException;
 import com.deadlineforce.backend.security.AuthenticationProvider;
 import com.deadlineforce.backend.security.CredentialsImpl;
 import com.deadlineforce.backend.security.jwt.JWTUtils;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,7 +47,8 @@ public class SecurityFilter implements Filter {
             }
 
             filterChain.doFilter(servletRequest, servletResponse);
-        } catch (AuthenticationException e) {
+        } catch (AuthenticationException | JWTVerificationException e) {
+            ((HttpServletResponse) servletResponse).setStatus(HttpStatus.FORBIDDEN.value());
             throw new BadCredentialsException(e.getMessage());
         }
     }
