@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/auth/logout").authenticated()
                 .requestMatchers("/auth/login", "/auth/signup").permitAll()
                 .requestMatchers("/notifications/**").authenticated()
-                .anyRequest().denyAll()
+                .anyRequest().permitAll()
                 .and()
                 .build();
     }
