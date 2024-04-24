@@ -1,0 +1,3 @@
+GET http://localhost:8080/notifications/history?page=0&size=20
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQwMDIxMzgsInVzZXJJZCI6MSwidXNlcm5hbWUiOiJ0ZXN0Iiwicm9sZSI6IlVTRVIifQ.25fUdA1t94DYaf5UpAwS5zlIwU3zuVTTthZEvcG5DWgmbtEEoNUXjfllUUkZAecCs2ZtwZQnSqW-cgypxXN94A

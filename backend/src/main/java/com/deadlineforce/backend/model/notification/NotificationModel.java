@@ -37,4 +37,12 @@ public class NotificationModel {
                         PageRequest.of(page, size));
         return pageNotification.getContent();
     }
+
+    public List<Notification> getReceivedNotifications(int page, int size) {
+        return this.userService.getUserFromSecurityContext().getReceivedNotifications()
+                .stream()
+                .skip((long) page*size)
+                .limit(size)
+                .toList();
+    }
 }

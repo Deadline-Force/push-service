@@ -30,4 +30,9 @@ public class NotificationController {
     public List<Notification> createdNotifications(@RequestParam int page, @RequestParam int size) {
         return this.notificationModel.getCreatedNotifications(page, size);
     }
+
+    @GetMapping("/history")
+    public List<Notification> historyNotification(@RequestParam int page, @RequestParam int size) {
+        return this.notificationModel.getReceivedNotifications(page, size);
+    }
 }
