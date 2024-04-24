@@ -26,4 +26,8 @@ public enum AuthorizationRoles {
         roles.add(role);
         return roles;
     }
+
+    public static AuthorizationRoles asValue(int id) {
+        return Arrays.stream(AuthorizationRoles.values()).filter(e -> e.getId() == id).findFirst().orElseThrow();
+    }
 }

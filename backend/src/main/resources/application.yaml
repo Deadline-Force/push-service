@@ -5,3 +5,9 @@ spring:
     password: "${DB_PASSWORD}"
   application:
     name: "backend"
+  jpa:
+    hibernate:
+      ddl-auto: validate
+springdoc:
+  swagger-ui:
+    path: /docs
