@@ -1,9 +1,11 @@
-FROM openjdk:17-alpine
+FROM maven:3.9.6-amazoncorretto-17-debian
 
 WORKDIR /backend
 
-COPY ./target/backend.jar /backend
+COPY . .
+
+RUN mvn clean package
 
 EXPOSE 8080
 
-ENTRYPOINT java -jar backend.jar
+ENTRYPOINT java -jar ./target/backend.jar
