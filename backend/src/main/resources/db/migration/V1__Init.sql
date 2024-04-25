@@ -9,7 +9,7 @@ INSERT INTO roles (title) VALUES
 CREATE TABLE IF NOT EXISTS users (
     user_id BIGSERIAL PRIMARY KEY NOT NULL,
     username VARCHAR(128) NOT NULL,
-    login VARCHAR(128) NOT NULL,
+    login VARCHAR(128) UNIQUE NOT NULL,
     password VARCHAR(128) NOT NULL,
     user_role INT NOT NULL,
     FOREIGN KEY (user_role) REFERENCES roles (role_id)
