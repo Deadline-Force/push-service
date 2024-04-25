@@ -36,3 +36,17 @@ xdg-open http://localhost:8080/docs
 ```
 xdg-open http://localhost:5173/
 ```
+
+## Дополнительная информация
+### Пользователи по умолчанию:
+- login:password | ROLE
+- employeetest1@gmail.com:123 | EMPLOYEE
+- testtest2employee@mail.ru:123 | EMPLOYEE
+- superuser@gmail.com:123 | ADMIN
+- senioradmin@gmail.com:123 | ADMIN
+
+### Описание основных HTTP Handlers
+> [./readme/http-module/README.md](./readme/http-module/README.md)
+
+#### Все остальные HTTP Handlers
+> http://localhost:8080/docs
