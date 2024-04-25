@@ -19,15 +19,18 @@ public class NotificationService {
     }
 
     @Transactional
-    public void sendNotification(User sender, User recipient, NotificationSend notificationSend) {
-        Notification notification = new Notification(notificationSend.title(), notificationSend.message(), sender);
-        this.notificationRepository.save(notification);
-
+    public void sendNotification(User sender, User recipient, Notification notification) {
         sender.getCreatedNotifications().add(notification);
         recipient.getReceivedNotifications().add(notification);
 
         this.notificationRepository.save(notification);
         this.userRepository.save(sender);
         this.userRepository.save(recipient);
+    }
+
+    public Notification createNotification(NotificationSend notificationSend, User sender) {
+        Notification notification = new Notification(notificationSend.title(), notificationSend.message(), sender);
+        this.notificationRepository.save(notification);
+        return notification;
     }
 }
