@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { fetchUserData } from '../../../redux/slices/auth'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAuth, selectIsAuth } from '../../../redux/slices/auth'
 import styles from './Login.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 const Login = () => {
+	const isAuth = useSelector(selectIsAuth)
 	const {
 		register,
 		handleSubmit,
@@ -13,16 +14,33 @@ const Login = () => {
 		formState: { errors, isValid },
 	} = useForm({
 		defaultValues: {
-			login: '',
-			password: '',
+			login: 'employeetest1@gmail.com',
+			password: '123',
 		},
 		mode: 'onChange',
 	})
 	const dispatch = useDispatch()
-	const onSubmit = (values) => {
-		dispatch(fetchUserData(values))
-	}
 
+
+
+		const onSubmit = async(values) => {
+			const data = await dispatch(fetchAuth(values))
+			if(!data.payload){
+				return alert('Не удалось авторизоваться')
+			}
+			if('token' in data.payload) {
+				window.localStorage.setItem('token', data.payload.token)
+				console.log(data)
+				
+			}
+		}
+
+	
+	console.log('isAuth',isAuth)
+
+	if(isAuth) {
+		return <Navigate to='/'/>
+	}
 	return (
 		<section className={styles.wrapper}>
 			<div className={styles.container}>
@@ -42,7 +60,7 @@ const Login = () => {
 					<input
 						type='text'
 						placeholder='Пароль'
-						{...register('password', { required: 'Укажите почту' })}
+						{...register('password', { required: 'Укажите пароль' })}
 						className={styles.input}
 					/>
 					<button type='submit'>Войти</button>
