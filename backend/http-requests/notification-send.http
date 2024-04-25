@@ -1,0 +1,5 @@
+POST http://localhost:8080/notifications/send/1
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTM5OTc1NjYsInVzZXJJZCI6MywidXNlcm5hbWUiOiLQn9Cw0LLQtdC7Iiwicm9sZSI6IlVTRVIifQ.y8yUWHn_4Eaib57qKizKnBD49xQS_qsf0ZZn3pX-rKfj-yyWRLN2ipaB1QdqoGmmztftrPCTfRyYMUDPipGYug
+Content-Type: application/json
+
+{"title":"Greeting","message":"Hello, my friend"}

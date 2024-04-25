@@ -1,0 +1,12 @@
+POST http://localhost:8080/notifications/dispatch
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQwMzM3OTYsInVzZXJJZCI6MywidXNlcm5hbWUiOiJTdXBlcnVzZXIiLCJyb2xlIjoiQURNSU4ifQ.V8svOFF_sU_yhSLf4-y2waoH3O-kzYET9w9DJtDd2SCb-5P1mINVdbgSnzBWyX8QyIlpectMdZXgC5_tKruK9A
+
+{
+  "userIds": null,
+  "userRole": "EMPLOYEE",
+  "notification": {
+    "title": "Спам рассылка",
+    "message": "Сотрудники! Приходите завтра сюда и будет чудо!"
+  }
+}
